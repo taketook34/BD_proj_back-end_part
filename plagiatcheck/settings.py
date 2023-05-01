@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0v)=f5caikue=3we%t+pyvuj-3n830mx#6c2_8ythfiu$y+@m6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.246.30.172', '10.246.30.171']
+ALLOWED_HOSTS = ['10.246.30.172', '127.0.0.1', '10.246.30.171']
 
 
 # Application definition
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'plagiatcheck.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': BASE_DIR.as_posix() + '/my.cnf',
+        },
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.mysql',
     }
 }
 
@@ -147,10 +151,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:5050"
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
